@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>江橋優喜自己紹介ページ</title>
+    <style>
+        /* 背景画像の部分 */
+    body{background: url(siro.jpg) no-repeat center center;
+  background-size: cover;
+  background-attachment: fixed;
+}
+ 
+ /* 領域の透過 */
+ .sample{
+     font-size: 20px;
+   background:#fff;
+   opacity:0.5;
+   padding: 30px;
+ }
+        header {
+	margin-top: 36px;	
+    margin-bottom: 36px;
+    text-align: center;	
+
+}
+nav li {
+	display: block;
+	width: 80px;
+    float: left;
+    font-family: 'Vollkorn', serif;
+}
+ul{
+display: table;
+margin: 0 auto;
+padding: 0;
+width: 80%;
+text-align: center;
+}
+ul li{
+display: table-cell;
+min-width: 50px;
+text-align: center;
+}
+ul li a{
+display: block;
+width: 100%;
+padding: 10px 0;
+color: #555;
+font-weight: bold;
+}
+ul li.current{
+background-color: #DEEBF7;
+}
+ul li.current a{
+color: #555;
+}
+ul li:hover{
+background-color: #FFF2CC;
+}
+
+
+
+nav+picture img {
+	
+	vertical-align: bottom;
+}
+
+  .slide {
+
+      
+ position: relative;
+ 
+ width: 80%;
+ height: 600px;
+ overflow: hidden;
+ margin : 0 auto 
+
+}
+.slide img {
+ position: absolute;
+ top: 50%;
+ left: 50%;
+ transform: translate(-50%, -50%);
+ width: 100%;
+ height: auto;
+ opacity: 0;
+}
+@keyframes thumb1 {
+ 0% {
+  filter: grayscale(0%);
+ }
+
+ 6% {
+  filter: grayscale(100%);
+ }
+
+ 10% {
+  filter: grayscale(100%);
+ }
+
+ 28% {
+  filter: grayscale(100%);
+ }
+
+ 37% {
+  filter: grayscale(0%);
+ }
+
+ 100% {
+  filter: grayscale(0%);
+ }
+}
+@keyframes thumb2 {
+ 0% {
+  filter: grayscale(0%);
+ }
+
+ 6% {
+  filter: grayscale(100%);
+ }
+
+ 10% {
+  filter: grayscale(100%);
+ }
+
+ 28% {
+  filter: grayscale(100%);
+ }
+
+ 37% {
+  filter: grayscale(0%);
+ }
+
+ 100% {
+  filter: grayscale(0%);
+ }
+}
+@keyframes thumb3 {
+ 0% {
+  filter: grayscale(0%);
+ }
+
+ 6% {
+  filter: grayscale(100%);
+ }
+
+ 10% {
+  filter: grayscale(100%);
+ }
+
+ 28% {
+  filter: grayscale(100%);
+ }
+
+ 37% {
+  filter: grayscale(0%);
+ }
+
+ 100% {
+  filter: grayscale(0%);
+ }
+}
+@keyframes slideshow1 {
+ 0% {
+  opacity: 0;
+ }
+
+ 10% {
+  opacity: 1;
+ }
+
+ 28% {
+  opacity: 1;
+ }
+
+ 38% {
+  opacity: 0;
+ }
+
+ 100% {
+  opacity: 0;
+ }
+}
+
+@keyframes slideshow2 {
+ 0% {
+  opacity: 0;
+ }
+
+ 10% {
+  opacity: 1;
+ }
+
+ 28% {
+  opacity: 1;
+ }
+
+ 38% {
+  opacity: 0;
+ }
+
+ 100% {
+  opacity: 0;
+ }
+
+}
+@keyframes slideshow3 {
+ 0% {
+  opacity: 0;
+ }
+
+ 10% {
+  opacity: 1;
+ }
+
+ 28% {
+  opacity: 1;
+ }
+
+ 38% {
+  opacity: 0;
+ }
+
+ 100% {
+  opacity: 0;
+ }
+
+}
+.thumbnail {
+ list-style: none;
+ display: flex;
+ padding: 0;
+ margin-top: 30px;
+ justify-content: center;
+}
+input[type="radio"] {
+ display: none;
+}
+.thumbnail img {
+ display: block;
+ width: 200px;
+ height: 100px;
+ object-fit: cover;
+ margin: 10px;
+ cursor: pointer;
+}
+/*ページを開いたとき＆一つ目のサムネイルをクリックしたとき*/
+#img1:checked ~ .thumbnail label[for="img1"] img {
+ animation: thumb1 24s linear infinite both;
+ animation-delay: 0s;
+ cursor: auto;
+}
+#img1:checked ~ .thumbnail label[for="img2"] img {
+ animation: thumb1 24s linear infinite both;
+ animation-delay: 8s;
+}
+#img1:checked ~ .thumbnail label[for="img3"] img {
+ animation: thumb1 24s linear infinite both;
+ animation-delay: 16s;
+}
+#img1:checked ~ .slide img {
+ animation: slideshow1 24s linear infinite;
+}
+#img1:checked ~ .slide img:nth-child(1) {
+ animation-delay: 0s;
+}
+#img1:checked ~ .slide img:nth-child(2) {
+ animation-delay: 8s;
+}
+#img1:checked ~ .slide img:nth-child(3) {
+ animation-delay: 16s;
+}
+/*二つ目のサムネイルをクリックしたとき*/
+#img2:checked ~ .thumbnail label[for="img1"] img {
+ animation: thumb2 24s linear infinite both;
+ animation-delay: 16s;
+}
+#img2:checked ~ .thumbnail label[for="img2"] img {
+ animation: thumb2 24s linear infinite both;
+ animation-delay: 0s;
+ cursor: auto;
+}
+#img2:checked ~ .thumbnail label[for="img3"] img {
+ animation: thumb2 24s linear infinite both;
+ animation-delay: 8s;
+}
+#img2:checked ~ .slide img {
+ animation: slideshow2 24s linear infinite;
+}
+#img2:checked ~ .slide img:nth-child(1) {
+ animation-delay: 16s;
+}
+#img2:checked ~ .slide img:nth-child(2) {
+ animation-delay: 0s;
+}
+#img2:checked ~ .slide img:nth-child(3) {
+ animation-delay: 8s;
+}
+/*二つ目のサムネイルをクリックしたとき*/
+#img3:checked ~ .thumbnail label[for="img1"] img {
+ animation: thumb3 24s linear infinite both;
+ animation-delay: 8s;
+}
+#img3:checked ~ .thumbnail label[for="img2"] img {
+ animation: thumb3 24s linear infinite both;
+ animation-delay: 16s;
+}
+#img3:checked ~ .thumbnail label[for="img3"] img {
+ animation: thumb3 24s linear infinite both;
+ animation-delay: 0s;
+ cursor: auto;
+}
+#img3:checked ~ .slide img {
+ animation: slideshow3 24s linear infinite;
+ animation-delay: 8s;
+}
+#img3:checked ~ .slide img:nth-child(1) {
+ animation-delay: 8s;
+}
+#img3:checked ~ .slide img:nth-child(2) {
+ animation-delay: 16s;
+}
+#img3:checked ~ .slide img:nth-child(3) {
+ animation-delay: 0s;
+}
+
+
+
+body{
+    text-align: center;
+    font-family: 'Hiragino Mincho Pro'   
+    
+
+}
+       
+        h1{
+            line-height: 70%;
+            color: #494949;
+            font-size: 30px;
+            font-family:  'Vollkorn', serif;
+            
+            
+            padding: 20px;
+            width: 100%;  
+            border-bottom: 1px rgb(102, 102, 102) solid;
+            
+            
+    padding-bottom: 36px;
+    
+  font-weight: normal;
+  
+}
+
+#container {
+width: 90%;
+margin: 0px auto;
+padding: 20px;
+padding-top: 36px;
+padding-bottom: 36px;
+background: #FFF;
+opacity:0.7;
+
+}
+
+h2{
+            
+            color: #494949;
+            font-size: 30px;
+            font-family:  'Vollkorn', serif;
+            
+            padding: 20px;
+            width: 100%;  
+            border-bottom: 1px rgb(102, 102, 102) solid;
+    padding-bottom: 36px;
+  font-weight: normal;
+  
+}
+
+#container2 {
+width: 90%;
+margin: 0px auto;
+padding: 20px;
+padding-top: 36px;
+padding-bottom: 36px;
+background: #FFF;
+opacity:0.7;
+
+}
+
+.example {
+  position: relative;
+  }
+
+.example a {/*aタグを画像の真ん中に*/
+  position: absolute;
+  top: 15%;
+  left: 50%;
+  -ms-transform: translate(-50%,-50%);
+  -webkit-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+  /*以下装飾*/
+  margin:20;/*余計な隙間を除く*/
+  font-size: 30px;/*文字サイズ*/
+  border: solid white 1px; /*線で囲う*/
+  padding: 7px;/*文字と線の間の余白*/
+  color: white;/*文字色*/
+  text-decoration: none;/*下線を表示させない*/
+  }
+
+.example a:hover{/*カーソルを当てたとき*/
+  background: rgba(175, 197, 50, 0.3);/*背景を半透明に*/
+  }
+
+.example img {
+  width: 60%;
+  }
+
+h3{
+            
+            color: #494949;
+            font-size: 30px;
+            font-family:  'Vollkorn', serif;
+           
+            
+            padding: 20px;
+            width: 100%;  
+            border-bottom: 1px rgb(102, 102, 102) solid;
+    padding-bottom: 36px;
+  font-weight: normal;
+  
+}
+
+#container3 {
+width: 90%;
+margin: 0px auto;
+padding: 20px;
+padding-top: 36px;
+padding-bottom: 36px;
+background: #FFF;
+opacity:0.7;
+
+}      
+
+.cp_cssslider {
+	width: 900px;
+	height: 250px;
+	overflow: hidden;
+	margin: 2em auto;
+	border: 10px solid #ffffff;
+	box-shadow:0px 0px 5px 0px rgba(0,0,0);
+}
+.cp_slide_item {
+	width: 400px;
+	height:500px;
+	float: left;
+	position: relative;
+}
+.cp_slidewrapper {
+	width: 500%;
+	position: relative;
+	left: 0;
+	animation: slider 20s infinite ease;
+}
+@-webkit-keyframes slider {
+		
+
+	20% {
+	-webkit-transform: translateX(-500px);
+	transform: translateX(-300px);
+	}
+	40% {
+	-webkit-transform: translateX(-800px);
+	transform: translateX(-600px);
+	}
+	60% {
+	-webkit-transform: translateX(-1200px);
+	transform: translateX(-900px);
+	}
+    80% {
+	-webkit-transform: translateX(-800px);
+	transform: translateX(-1200px);
+	}
+	100% {
+	-webkit-transform: translateX(-1300px);
+	transform: translateX(-1500px);
+	}
+}
+@keyframes slider {
+	
+
+	20% {
+	-webkit-transform: translateX(-200px);
+	transform: translateX(-200px);
+	}
+	40% {
+	-webkit-transform: translateX(-400px);
+	transform: translateX(-400px);
+	}
+	60% {
+	-webkit-transform: translateX(-600px);
+	transform: translateX(-600px);
+	}
+    80% {
+	-webkit-transform: translateX(-800px);
+	transform: translateX(-800px);
+	}
+	100% {
+	-webkit-transform: translateX(-1000px);
+	transform: translateX(-1000px);
+	}
+}
+footer {
+    color: rgb(192, 192, 192);
+	padding-top: 1.4rem;
+	padding-bottom: 1.4rem;
+	background: #664826;
+	text-align: center;
+
+
+}
+
+
+    </style>
+</head>
+<body>
+    <header>
+        <div class="sample">
+            <p>Welcome to Yuki Ehashi's introductory page!　 
+            I look forward to studying with you!</p>
+        </div>
+        <nav>
+            <ul>
+                
+            <li class=”current”>
+               <a href="#ab">PROFILE</a></li>
+            <li><a href="#abc">SNS</a></li>
+            <li><a href="#abcd">HOBBIES</a>
+            </li>
+           
+            </ul>
+            </nav>
+           
+              <div>
+                <input type="radio" name="photo" id="img1" checked>
+                <input type="radio" name="photo" id="img2">
+                <input type="radio" name="photo" id="img3">
+                <div class="slide">
+                 <img src="header0.jpeg" >
+                 <img src="header.jpg" >
+                 <img src="header1.jpg" >
+                </div> 
+                <ul class="thumbnail">
+                 <li>
+                  <label for="img1">
+                   <img src="header0.jpeg" alt=""></label>
+                 </li>
+                 <li>
+                  <label for="img2">
+                   <img src="header.jpg" alt=""></label>
+                 </li>
+                 <li>
+                  <label for="img3">
+                   <img src="header1.jpg" alt=""></label>
+                 </li>
+                </ul>
+               </div></div>
+               
+
+
+             
+
+              
+    </header>
+    
+    <main>
+        <article>
+            <body>
+               
+                <h1 id="ab">PROFILE</h1>
+              <div id="container">
+            <p></br>
+            <p>江橋　優喜(えはし　ゆうき)</p>
+            <p>2000,8,22 生</p>
+            <p>千葉出身</p>
+            <br></br>
+            <p>Programming経験言語</p>
+            <li>processing</li>
+            <li>C言語</li>
+            <li>HTML/CSS</li>
+            <br></br>
+            <p>C言語は前期に習ったばかりで記憶が新しいのでまだ少しはできると思います（笑）</p>
+            <p>得意ではありませんが、なんとか頑張りました！</p>
+
+            
+    
+            <p></br>		
+            </div>
+        </body>
+        
+        <h2 id="abc">SNS</h2>
+            <div id="container2">
+                <p>Instagram毎日見てます！</p>
+                <li>＠yu＿822k</ぃ>
+                <p>リンクから飛べるので良かったらフォローよろしくお願いします！（笑）</p>
+            </div>
+            <br></br>
+            <div class="example">
+                <img src="mon.jpg" />
+                <a href="https://www.instagram.com/yu_822k/"><i class="fa fa-twitter" ></i> ❤︎Follow Me❤︎</a>	
+              </div>
+            <p></br>
+            
+                <h3 id="abcd">HOBBIES</h3>
+                <div id="container3">
+            <li>食べる事</li>
+                <p>食べることが大好きなので、美味しいごはん屋さんをネットやインスタでよく探しています。</p>
+                <p>今年に入ってからは外出があまりできていないので、自分で作って食べる事にハマってます！</p>
+                <br></br>
+                <li>ネットサーフィンする事</li>
+                <p>自粛生活で培った趣味です（笑）</p>
+                <p>大体洋服のブランドをネットで見て購入しています！</p>
+                <p>ファッションやメイクなどに興味を持ってます！</p>
+            </div>
+                        <div class="cp_cssslider">
+        <div class="cp_slidewrapper">
+            <div class="cp_slide_item"><img src="food0.jpg"width="250"></div>
+            <div class="cp_slide_item"><img src="food.jpg"width="250"></div>
+            <div class="cp_slide_item"><img src="food1.jpg"width="250"></div>
+            <div class="cp_slide_item"><img src="fashon.jpg"width="250"></div>
+            <div class="cp_slide_item"><img src="fashon1.jpg"width="250"></div>
+            
+    </div>
+    </div>
+            
+                <p></br>
+    
+    
+    
+                </ul>
+        </article>
+    </main>
+    <footer>
+        <p id="copyright">
+            <small>Copyright &copy; 2020 Yuuki Ehashi. All rights reserved.</small>
+     </p>
+    </footer>
+</body>
+</html>
+
+
+
