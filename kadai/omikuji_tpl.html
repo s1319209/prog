@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<script src="js/jquery-2.1.3.min.js"></script>
+<link rel="stylesheet" href="css/sample.css">
+<title>⛩おみくじ🥠</title>
+</head>
+<body>
+
+<style>
+    body{
+        background-color: rgba(255, 246, 233, 0.5);
+        font-family: font-family “HGP行書体”, “ＭＳ Ｐ明朝”, “MS PMincho”, serif;
+    }
+
+    header{
+        background-color: rgba(255, 246, 233, 0.5); 
+    }
+
+    p{
+        line-height: 70%;   
+        font-size: 30px;
+        font-family:  'Vollkorn', serif;
+        padding: 20px;
+        width: 100%;  
+        border-bottom: 50px rgb(255, 212, 147) groove;      
+        padding-bottom: 36px;      
+    }
+
+    h1{
+        text-align: center;
+        margin-top: 0px;
+    }  
+
+    li {
+    background-color: coral;
+    color: cornsilk;
+    } 
+</style>
+
+
+<header>
+    <h1>⛩おみくじ⛩</h1>
+</header>
+
+<main>
+    <ul>
+        <li id="pull">おみくじを引く↓</li>
+    </ul>
+
+    <p id="echo"></p>
+    <h1 id="kekka"></h1>
+</main>
+
+<script>
+    //Clickイベントのブロック
+const pull = document.querySelector("#pull");
+pull.onclick = function(){
+    //乱数をつくる
+    const num = Math.ceil(Math.random() * 5);
+    //乱数をIF分岐処理で分ける
+    
+    if(num==1){
+        const echo = document.querySelector("#echo");
+        kekka.innerHTML="大吉です！"
+        echo.innerHTML='<img src="daikichi.jpg" alt="大吉" width="400" height="250">';
+
+        echo.style.backgroundColor = "#FFD5EC";   
+        kekka.style.fontSize = "50px";
+        
+        
+    }
+    if(num==2){
+        const kekka = document.querySelector("#kekka");
+        const echo = document.querySelector("#echo");
+        kekka.innerHTML="中吉です！"
+        echo.innerHTML='<img src="chukichi.jpg" alt="中吉" width="400" height="250">';
+        
+        echo.style.backgroundColor = "#FFDBC9"; 
+        kekka.style.fontSize = "50px";
+
+    }
+    if(num==3){
+        const echo = document.querySelector("#echo");
+        kekka.innerHTML="小吉です。"
+        echo.innerHTML='<img src="shokichi.jpg" alt="小吉" width="400" height="250">';
+
+        echo.style.backgroundColor = "#F3FFD8";  
+        kekka.style.fontSize = "50px";
+
+    }
+    if(num==4){
+        const echo = document.querySelector("#echo");
+        kekka.innerHTML="吉です。"
+        echo.innerHTML='<img src="kichi.jpg" alt="吉" width="400" height="250">';
+        backgroundColor = "#FFFFEE";  
+        kekka.style.fontSize = "50px";
+
+    }
+    if(num==5){
+        const echo = document.querySelector("#echo");
+        kekka.innerHTML="凶です・・・"
+        echo.innerHTML='<img src="kyou.jpg" alt="凶" width="400" height="250">';
+        
+        echo.style.backgroundColor = "#EEEEEE";  
+        kekka.style.fontSize = "50px";
+        
+    }
+}
+
+</script>
+</body>
+</html>
