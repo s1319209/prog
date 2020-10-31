@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>繰り返し処理：for</title>
+<script src="js/jquery-2.1.3.min.js"></script>
+</head>
+<body>
+
+
+<script>
+/* ------------------------------------------------------------------------
+ for (ループ初期値; ループ条件; ループするたびにおこなう処理) {
+    条件に一致している場合(true)繰り返し処理をおこなう
+}
+------------------------------------------------------------------------ */
+//基本( i < 10 )
+console.log("A------------------");
+for(let i=0; i<10; i++){
+    console.log(i +"回目");
+}
+
+//応用1(i < 7)
+let week1 = ["日","月","火","水","木","金","土"];
+console.log("B-------------------");
+for(let i=0; i<7; i++){
+    console.log(week1[i]);
+}
+
+//応用2( i < week2.length )
+let week2 = ["日","月","火","水","木","金","土"];
+console.log("C-------------------");
+
+for(let i=0; i<week2.length; i++){
+console.log(week2[i]);
+}
+
+//応用3( i < week3.length )
+let week3 = ["Sun","Mon","Tues","Wednes","Thurs","Fri","Satur"];
+console.log("D-------------------");
+
+for(let i=0; i<week3.length; i++){
+console.log(week3[i] + "day");
+}
+
+//応用4( i < week4.length )
+let week4 = ["春","夏","秋","冬"];
+console.log("E-------------------");
+
+for(let i=0; i<week4.length; i++){
+console.log(week4[i]);
+}
+
+//応用5( i < 13 )
+console.log("F-------------------");
+
+for(let i=1; i<13; i++){
+console.log(i +"月");
+}
+
+//応用6( i < week5.length )
+let week5 = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+console.log("G-------------------");
+
+for(let i=0; i<week5.length; i++){
+console.log(week5[i]);
+}
+
+//応用7( i < 32 )
+console.log("H-------------------");
+
+for(let i=1; i<32; i++){
+console.log("1月" + i + "日");
+}
+
+//応用8( i < 29 )
+console.log("I-------------------");
+
+for(let i=1; i<29; i++){
+console.log("2月" + i + "日");
+}
+
+//応用9( i < 32 )
+console.log("J-------------------");
+
+for(let i=1; i<32; i++){
+console.log("3月" + i + "日");
+}
+
+//応用9( i < 32 )
+console.log("K-------------------");
+
+for(let i=1; i<32; i++){
+console.log("4月" + i + "日");
+}
+
+//応用10( i < 31 )
+console.log("L-------------------");
+
+for(let i=1; i<31; i++){
+console.log("5月" + i + "日");
+}
+
+//応用11( i < 31 )
+console.log("M-------------------");
+
+for(let i=1; i<31; i++){
+console.log("6月" + i + "日");
+}
+
+//応用12( i < 32 )
+console.log("N-------------------");
+
+for(let i=1; i<32; i++){
+console.log("7月" + i + "日");
+}
+
+//応用13( i < 32 )
+console.log("O-------------------");
+
+for(let i=1; i<32; i++){
+console.log("8月" + i + "日");
+}
+
+//応用14( i < 31 )
+console.log("P-------------------");
+
+for(let i=1; i<31; i++){
+console.log("9月" + i + "日");
+}
+
+//応用15( i < 32 )
+console.log("Q-------------------");
+
+for(let i=1; i<32; i++){
+console.log("10月" + i + "日");
+}
+
+//応用16( i < 31 )
+console.log("R-------------------");
+
+for(let i=1; i<31; i++){
+console.log("11月" + i + "日");
+}
+
+//応用17( i < 32 )
+console.log("M-------------------");
+
+for(let i=1; i<32; i++){
+console.log("12月" + i + "日");
+}
+</script>
+</body>
+</html>
