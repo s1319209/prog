@@ -1,0 +1,210 @@
+body{
+    margin:0;
+    padding:0;
+    text-align:left;
+    font-size: 32px;
+    width:100%;
+}
+header{
+    background-color: #fff;
+    border-bottom: 7px double #ccc;
+    text-align: center;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+h1{
+    position: relative;
+    padding: 0.5em;
+    background:#ffeaa7;
+    color:  #505050;
+    width: 60%;
+    margin: 0 auto;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+h1::before {
+    position: absolute;
+    content: '';
+    top: 100%;
+    left: 0;
+    border: none;
+    border-bottom: solid 15px transparent;
+    border-right: solid 20px rgb(149, 158, 155);
+}
+h2{
+    position: relative;
+    padding: 0.6em;
+    background: #ffbd71;
+    width: 30%;
+    color: #505050;
+    font-size: 30px;
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 20px;
+}
+  h2:after{
+    position: absolute;
+    content: '';
+    top: 100%;
+    left: 30px;
+    border: 15px solid transparent;
+    border-top: 15px solid #ffbd71;
+    width: 0;
+    height: 0;
+}
+main{
+    text-align: center;
+    width:100%;
+    display: block;
+    position:relative;
+}
+h3{
+    color: #505050;
+    font-size: 30px; 
+    margin-bottom: 5px;
+}
+select{
+    margin-top: 30px;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	margin-bottom: 20px;
+	padding: 7px 30px 7px 10px;
+	font-size: 93%;
+	line-height: 1.1em;
+	border-radius: 5px;
+	border: none;
+    background-color: #ffeaa7;
+    text-align: center;
+    color: #505050;
+}
+footer{
+    background-color: #fff;
+    border-bottom: 7px double #ccc;
+    text-align: center;
+    color: rgb(255, 165, 159);
+}
+p{
+    font-size:100%;
+    text-align: center;
+    border-bottom:1px solid #fff;
+    height:200px;
+}
+ul{
+    padding: 0;
+    display:table;  /* 定義 */
+    table-layout: fixed;
+    width:96%;
+    font-size: 80%;
+    margin: 0 3%;
+    text-align: center;
+    margin-bottom: 20px;
+}
+label{
+    box-shadow:0 3px 5px rgba(0,0,0,.2);
+    background-color: rgb(243, 222, 193);
+    margin: 30px;
+    width:260px;
+    display:inline-block;
+    position:relative;
+    margin-left:50px;
+}
+select{
+    border:none;
+    outline:none;
+    display: inline-block;
+    -webkit-appearance:none;
+    -moz-appearance:none;
+    appearance:none;
+    cursor:pointer;
+    font-size:16px;
+    color:#777777;
+    border-radius:0;
+    width:275px;
+    z-index:2;
+    background:transparent;
+}
+label:after{
+    content:"\25bc";
+    font-size:16px;
+    color:white;
+    background:#f3a1a1;
+    width:42px;
+    text-align:center;
+    line-height:3.2em;
+    top:0;
+    right:0;
+    bottom:0;
+    position:absolute;
+    pointer-events:none;
+}
+option{
+    border-bottom:1px solid #eaeaea;
+    border-left:3px solid white;
+    appearance:none;
+}
+option:hover{
+    background-color:white;
+    border-left:3px solid #f3a1a1;
+}
+#menu ul{
+    margin: 0; 
+    padding: 0; 
+    list-style: none;
+}
+#menu li{ 
+    display: inline-block; 
+    padding: 0; 
+    margin: 0; 
+    font-size: 30px;
+}
+#menu li a{
+    display: block;
+    width: 200px;
+    padding: 3px;
+    margin: 0px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    text-decoration: none;
+    border:outset 3px rgb(243, 222, 193);
+    background-color:  rgb(243, 222, 193);
+    text-align: center;
+    color: #414141;
+    font-size: 30px;
+}
+#menu li a:hover{
+    border: inset 3px  #946c51;
+    background-color: #946c51;
+} 
+textarea{
+    margin: 10px 3%;
+    width: 95%;
+    height: 100px;
+    font-size:80%;
+    box-shadow: 3px 3px 3px 3px #946c51;;
+    background-color:#ffbd71;
+    border: none;
+}
+#key{
+    margin:0 3%;
+    width: 95%;
+    font-size:80%;
+    background-color: #946c51;
+    box-shadow: 3px 3px 3px 3px #946c51;
+}
+table{
+    margin: 20px 3%;
+    width:96%; 
+}
+th{
+    color: #505050;
+    width:30%;
+    font-size:24px;
+    background-color:#ffeaa7;
+    border-bottom: 1px solid #ffeaa7;
+}
+td{
+    color: #505050;
+    font-size:16px;
+    background-color:#ffbd71;
+    border-bottom: 1px solid #b49356;
+}
