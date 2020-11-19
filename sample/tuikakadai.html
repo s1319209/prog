@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>四則演算の計算</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+    <form name="frm">
+        <input type="text" name="kazu"value=0>
+        <select name="sisoku">
+          <option value="tasu" selected="selected">＋</option>
+          <option value="hiku">−</option>
+          <option value="kake">×</option>
+          <option value="waru">÷</option>
+        </select>
+        <input type="text" name="kazu2"value=0>
+        <input type="text" name="result"value=0>
+        <INPUT type="button" name="buttondevide" onClick="enzan(kazu.value,kazu2.value,result,sisoku.value)" value="結果">
+    </form>
+    <br>
+<script>
+function enzan(a,b,c,d)
+    {
+        if(d=="tasu")
+        {
+            Add(a,b,c);
+        }
+        else if  (d=="hiku")
+        {
+            Minus(a,b,c);
+        }
+        else if  (d=="kake")
+        {
+            Multiply(a,b,c);
+        }
+        else if  (d=="waru")
+        {
+            Divide(a,b,c);
+        }
+    }
+
+function Add(a,b,c)
+    {
+       c.value=(parseInt(a)+parseInt(b));
+    }
+
+function Minus(a,b,c)
+    {
+       c.value=(a-b);
+    }
+
+function Multiply(a,b,c)
+    {
+       c.value=(a*b);
+    }
+
+function Devide(a,b,c)
+    {
+       c.value=(a/b);
+    }
+
+</script>
+</body>
+</html>
