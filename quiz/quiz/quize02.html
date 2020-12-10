@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<link rel="stylesheet" href="css/sample.css">
+<title>クイズ</title>
+</head>
+<body>
+<style>
+  body{
+    background-color: rgb(224, 253, 255);
+    font-family:"HGP行書体", "ＭＳ Ｐ明朝", "MS PMincho", serif;
+    size: 80px;
+    }
+  p{
+    margin-bottom: 0px;
+    color: #313131;
+    border-bottom: none;
+    text-align: center;
+  }
+  header{
+    background-color:  #87cbe4;
+    color: #4c4f57;
+  }
+  footer{
+    size: 20px;
+    width: 100%;
+    background-color: #87cbe4;
+    color: rgb(66, 66, 66);
+    text-align: center;
+    padding: 10px 0;
+    position: fixed;
+    bottom: 0; 
+  }
+  .btn-square-shadow {
+    size:20px
+    display: inline-block;
+    padding: 0.5em 1em;
+    text-decoration: none;
+    background: #bae3ff;
+    color: rgb(94, 94, 94);
+    border-bottom: solid 4px #808592;
+    border-radius: 3px;
+  }
+  .btn-square-shadow:active {
+    -webkit-transform: translateY(4px);
+    transform: translateY(4px);
+    box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.2);
+    border-bottom: none;
+  }
+  h1{
+    padding: 0px;
+    bottom: 0; 
+    font-size: 30px;
+  }
+  h2{
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 30px;
+    color: #1d455f;
+    font-family: 'メイリオ', Meiryo,'ヒラギノ角ゴシック','Hiragino Sans',sans-serif;
+  }
+  .toi{
+    margin-top: 20px;
+    margin-bottom: 10px;
+    size: 20px;
+  }
+  .last{
+    background-color: #5b79a7;
+    font-size: 40px;
+    color: #ffffff;
+    text-align: center;
+    margin-top: 100px;
+  }
+  .kotae{
+    margin: none;
+    padding: none;
+    color: #331e01;
+    text-align: center;
+    background-color: #dae5ff;
+  }
+  .kousin{
+    text-align: center;
+    margin-top: 30px;
+    font-size: 20px;
+    display: inline-block;
+    padding: 0.5em 1em 0.3em;
+    color: #362403;
+    border: none;
+    border-radius: 5px;
+    background-color: #ccf1ff;
+    background-size: 10px 10px;
+    background-image: radial-gradient(#a7eff8 15%, transparent 20%),
+    radial-gradient(#a7eff8 15%, transparent 20%);
+    background-position: 0 0, 15px 15px;
+  }
+  
+</style>
+<header>
+    <h1>1問目</h1>
+    <h2>クイズに挑戦！</h2>
+</header>
+
+<main>
+  <p id="quest">ここに問題が出題されます</p>
+  <p>
+    <input type="radio" name="toi" value="1" id="toi"><span id="toi1">選択肢１</span>
+    <input type="radio" name="toi" value="2" id="toi"><span id="toi2">選択肢２</span>
+    <input type="radio" name="toi" value="3" id="toi"><span id="toi3">選択肢３</span>
+  </p>
+
+  <div style="text-align: center;">
+    <a href="#" class="btn-square-shadow" name="btn">次へ</a>
+  </div>
+
+  <div id="last" class="last"></div>
+  <div id="kotae" class="kotae"></div>
+  <div id="kotae1" class="kotae"></div>
+  <div id="kotae2" class="kotae"></div>
+  <div id="kotae3" class="kotae"></div>
+  <div id="kotae4" class="kotae"></div>
+  <div id="kotae5" class="kotae"></div>
+  <div id="kotae6" class="kotae"></div>
+  <div style="text-align: center;">
+    <div id ="kousin"><input type="button" class="kousin" value="同じ問題を初めから" onclick="window.location.reload();"></div>
+  </div>
+</main>
+<footer><div id="fot"></div></footer>
+<script>
+//ここから記述領域［START］
+  $("#kousin").hide();
+  //以下に配列を記述してください。
+  
+  //問題文[配列]
+  const qs = [
+  "通るときには閉まって、通らないときには開いているものは何？",
+  "話すことがとても好きな道具は何？",
+  "世界の真ん中にいる虫は何？",
+  "9匹のトラが乗っている乗り物は？",
+  "いつも、文句ばかり言っている動物は？",
+  "花束を２束と３束、合わせると何束？",
+  ];
+    
+  //回答選択肢[多重配列]
+  const toi = [
+  ["踏み切り","洗濯機","冷蔵庫"],
+  ["スプーン","シャベル","しゃもじ"],
+  ["てんとう虫","カマキリ","蚊"],
+  ["トラ","ねこ","犬"],
+  ["うし","ねずみ","ウサギ"],
+  ["１束","5束","３束"]
+  ];
+    
+  //答え[配列]
+  const ans = [1,2,3,1,1,1];
+
+  //1.最初の問題文＆回答選択肢＆回答値を設定
+  let i = 0;
+  $("#quest").text( qs[i] );
+  $("#toi1").text( toi[i][0] );
+  $("#toi2").text( toi[i][1] );
+  $("#toi3").text( toi[i][2] );
+  $("#toi1").text( toi[i][0] );
+  $("#toi1").text( toi[i][0] );
+  $("#toi1").text( toi[i][0] );
+
+  let count = 0;
+
+  //2.ラジオボタンをクリックしたらイベント発生！(クリックイベント)
+  $("[name=toi]").on("click",function(){
+      $([name=toi]).prop('disabled', true);
+      $('input[name="toi"]').prop('disabled', true);
+      const v = $(this).val();
+
+      if(ans[i] == v){
+        $("h2").html('<img src="seikai.png" width="100px">').hide(0).show(1000);
+        $("#fot").html(count+1+"問正解");
+        count++;
+      }else{
+        $("h2").html('<img src="huseikai.png" width="100px">').hide(0).show(1000);
+      }
+  });
+
+  $("[name=btn]").on("click",function(){
+    $(name[toi]).prop('disabled', false);
+    $(name[toi]).removeAttr('disabled');
+    $('input[name="toi"]').removeAttr('disabled');
+
+    if(i < 5){
+      $("h2").hide();
+      $('input[value="1"]').prop('checked', false);
+      $('input[value="2"]').prop('checked', false);
+      $('input[value="3"]').prop('checked', false);
+      i++;
+      $("h1").text(i+1+"問目");
+      $("#quest").text( qs[i] );
+      $("#toi1").text( toi[i][0]);
+      $("#toi2").text( toi[i][1] );
+      $("#toi3").text( toi[i][2] );
+      $("#toi1").text( toi[i][0] );
+      $("#toi1").text( toi[i][0] );
+      $("#toi1").text( toi[i][0] ); 
+    }else{
+      $("#toi").remove();
+      $("[name=btn]").remove();
+      $("h1,h2,p,footer").remove();
+      alert("終了");
+      $("#last").html("あなたは6問中"+count+"問正解しました！").hide(0).show(1500);
+      $("#kotae").html("答え");
+      $("#kotae1").html("問１　　　踏み切り");
+      $("#kotae2").html("問２　　　シャベル");
+      $("#kotae3").html("問３　　　　　　蚊");
+      $("#kotae4").html("問４　　　　　トラ");
+      $("#kotae5").html("問５　　　　　うし");
+      $("#kotae6").html("問６　　　　　１束");
+      $("#kousin").show();
+    }
+  });
+
+//ここまでが記述領域［END］
+</script>
+</body>
+</html>
