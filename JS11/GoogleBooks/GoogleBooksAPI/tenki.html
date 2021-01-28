@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>関東天気予報</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script> 
+<script src='https://use.fontawesome.com/releases/v5.0.13/js/all.js'></script>
+</head>
+<body>
+    <style>
+        body {
+            background: url(haikei.jpg) no-repeat center;
+            background-size: cover;
+            background-attachment: fixed;
+            background-color:rgba(255,255,255,0.4);
+            background-blend-mode:color;
+            text-align: center;
+            margin: 50px;
+            margin-top: 1em;
+        }
+
+        h1 {
+            font-family: 'ヒラギノ角ゴ Std W8','Hiragino Kaku Gothic Std'
+            font-size: 16px;
+            padding-top: .1em;
+            padding-bottom: .1em;
+            padding-left: .5em;
+            margin-bottom: 2em;
+            background-color: rgb(0, 0, 0,0.4);
+            border-radius:15px;
+            color: rgb(238, 238, 238);
+        }
+
+        .city {
+            font-family: 'Courier New', Courier, monospace;
+            margin-top: 45px;
+            font-size: 1.0em;
+            width: 70%;
+            padding: 3em;
+            padding-bottom: 6em;
+            margin-bottom: 5em;
+            border: 4px double #000000;
+            background-color: rgba(255, 255, 255, 0.7);
+            border-radius: 10px;
+            text-align: center;
+            color: #0e310d;
+            margin-left:auto;
+            margin-right:auto;
+        
+        }
+        
+        .toshi input {
+            display: none;
+        }
+
+        .toshi label {
+            display: block;
+            float: left;
+            cursor: pointer;
+            width: 13%;
+            margin: 0;
+            padding: 12px 5px;
+            border-right: 1px solid #abb2b7;
+            background: #bdc3c7;
+            color: #555e64;
+            font-size: 14px;
+            line-height: 1;
+            transition: .2s;
+            margin-right: auto;
+            margin-left: auto;
+        }
+
+        .toshi label:first-of-type {
+            border-radius: 3px 0 0 3px;
+        }
+
+        .toshi label:last-of-type {
+            border-right: 0px;
+            border-radius: 0 3px 3px 0;
+        }
+
+        .toshi input[type="radio"]:checked + label {
+            background-color: #5ab4bd;
+            color: #fff;
+        }
+
+        .moji {
+            font-size: 24px;
+            font-weight:bold;
+            color: #5ab4bd;
+            background-color: rgb(252, 252, 252);
+        }
+
+        .kekka {
+            width:100%;
+            margin-top: 2.2rem;
+            margin-left:auto;
+            margin-right:auto;
+            font-size: 1.2em;
+            font-weight: bold;
+            width: 80%;
+            padding-top: .2em;
+            padding-bottom: .7em;
+            background-color:rgba(0,0,0,0.4);
+            color: #ffffff;
+        }
+
+        .tabs {
+            margin-top: 50px;
+            padding-bottom: 40px;
+            background-color: rgb(255, 255, 255);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            width: 80%;
+            margin: 0 auto;
+        }
+
+        .tab_item {
+            width: calc(100%/3);
+            height: 50px;
+            border-bottom: 3px solid #5ab4bd;
+            background-color: #d9d9d9;
+            line-height: 50px;
+            font-size: 16px;
+
+            color: #565656;
+            display: block;
+            float: left;
+            font-weight: bold;
+            transition: all 0.2s ease;
+        }
+
+        .tab_item:hover {
+            opacity: 0.75;
+        }
+
+        input[name="tab_item"] {
+            display: none;
+        }
+
+        .tab_content {
+            display: none;
+            padding: 40px 40px 0;
+            clear: both;
+            overflow: hidden;
+        }
+
+        #jikan:checked ~ #jikan_content,
+        #day:checked ~ #day_content,
+        #week:checked ~ #week_content {
+            display: block;
+        }
+
+        .tabs input:checked + .tab_item {
+            background-color: #5ab4bd;
+            color: #fff;
+        }
+
+        p{
+            border-bottom: groove;
+            padding: 0.5em;
+            margin-top: 0.5em;
+        }
+       
+    </style>
+    <div class="container">
+        <h1 id="view"></h1>
+        <div class="city">
+            <h2>都市の選択</h2>
+            <div class="toshi">
+                <input type="radio" class="citybtn" name="cityRadio" id="select1" value="2111901">
+                <label for="select1">水戸</label>
+                <input type="radio" class="citybtn" name="cityRadio" id="select2" value="1849053">
+                <label for="select2">宇都宮</label>
+                <input type="radio" class="citybtn" name="cityRadio" id="select3" value="1857843">
+                <label for="select3">前橋</label>
+                <input type="radio" class="citybtn" name="cityRadio" id="select4" value="6940394">
+                <label for="select4">さいたま</label>
+                <input type="radio" class="citybtn" name="cityRadio" id="select5" value="2113015">
+                <label for="select5">千葉</label>
+                <input type="radio" class="citybtn" name="cityRadio" id="select6" value="1850147">
+                <label for="select6">東京</label>
+                <input type="radio" class="citybtn" name="cityRadio" id="select7" value="1848354">
+                <label for="select7">横浜</label>
+            </div>
+        </div> 
+    </div> 
+
+        <div class="tabs">
+            <input id="jikan" type="radio" name="tab_item" checked>
+            <label class="tab_item" for="jikan">3時間毎</label>
+            <input id="day" type="radio" name="tab_item">
+            <label class="tab_item" for="day">現在</label>
+            <input id="week" type="radio" name="tab_item">
+            <label class="tab_item" for="week">3日間</label>
+
+            <div class="tab_content" id="jikan_content">
+              <div class="tab_content_description">
+                <div class="kekka">
+                    <p id="jikan3" class="moji">ここに表示されます</p>
+                    <p id="jikan6">ここに表示されます</p>
+                    <p id="jikan9">ここに表示されます</p>
+                    <p id="jikan12">ここに表示されます</p>
+                    <p id="jikan15">ここに表示されます</p>
+                    <p id="jikan18">ここに表示されます</p>
+                    <p id="jikan21">ここに表示されます</p>
+                </div>  
+              </div>
+            </div>
+
+            <div class="tab_content" id="day_content">
+              <div class="tab_content_description">
+                <div class="kekka">
+                    <h3 id="view2" class="moji"></h3>
+                    <div><span id = "weather" class="bold"></span></div>
+                    <div><span id = "weather2" class="bold"></span></div>
+                    <div><span id = "tenkihyouji" class="bold"></span></div>
+                    <div>気温　<span id = "kion" class="bold"></span>　℃</div>
+                    <div>湿度　<span id = "situdo" class="bold"></span>　%</div>
+                </div>  
+              </div>
+            </div>
+
+            <div class="tab_content" id="week_content">
+              <div class="tab_content_description">
+                <div class="kekka">
+                    <p id="day0" class="moji"></p>
+                    <p id="day8"></p>
+                    <p id="day16"></p>
+                    <p id="day24"></p>                     
+              </div>
+            </div>
+          </div>
+    </div>
+    
+    <script>
+    let week   = ["日", "月", "火", "水", "木", "金", "土"];
+    let now = new Date();            
+    let year = now.getFullYear();    
+    let month = now.getMonth() + 1;  
+    let date = now.getDate();        
+    let day = now.getDay();          
+    let h = now.getHours();          
+    let m = now.getMinutes();        
+    let s = now.getSeconds();        
+
+    let str = year + "-" + month + "-" + date + "(" + week[day] + ")" ;
+    let view = h + " 時 " + m + " 分の天気";
+
+    $("#view").html(str);
+    $("#view2").html(view);
+    
+    $("#jikan3").html("日にち・時刻　　　気温　　湿度　　天気");
+    $("#jikan6").html("　　　");
+    $("#jikan9").html("　　　");
+    $("#jikan12").html("　　　");
+    $("#jikan15").html("　　　");
+    $("#jikan18").html("　　　");
+    $("#jikan21").html("　　　");
+
+    $("#day0").html("日にち　　天気　　気温　風向き　風速");
+    $("#day8").html("　　　");
+    $("#day16").html("　　　");
+    $("#day32").html("　　　");
+
+    $(document).ready(function(){
+        $(".citybtn").on("click", function(){
+            val = $(this).val();
+            console.log(val);
+            //現在の天気取得
+            $.post("http://api.openweathermap.org/data/2.5/weather?id=" + $(this).val() + "&appid=98226af57c372a395d8eab253a62da2d&lang=ja&units=metric",  
+                function(json){
+                    console.log(json);
+                    $("#weather").html(json.weather[0].description);
+                    $("#kion").html(Math.round(json.main.temp));
+                    $("#situdo").html(json.main.humidity);
+
+                if (json.weather[0].main == 'Clouds'){
+                    $("#tenkihyouji").html("<img src='http://openweathermap.org/img/w/04d.png' >");
+                } else if (json.weather[0].main == 'Snow') {
+                    $("#tenkihyouji").html("<img src='http://openweathermap.org/img/w/13d.png' >");
+                } else if (json.weather[0].main == 'Rain') {
+                    $("#tenkihyouji").html("<img src='http://openweathermap.org/img/w/09d.png' >");
+                } else if (json.weather[0].main == 'Clear') {
+                    $("#tenkihyouji").html("<img src='http://openweathermap.org/img/w/01d.png' >");
+                } else if (json.weather[0].main == 'Fog') {
+                    $("#tenkihyouji").html("<img src='http://openweathermap.org/img/w/50d.png' >");
+                } else if (json.weather[0].main == 'Mist') {
+                    $("#tenkihyouji").html("<img src='http://openweathermap.org/img/w/50n.png' >");
+                } else if (json.weather[0].main == 'Haze') {
+                    $("#tenkihyouji").html("<img src='http://openweathermap.org/img/w/50d.png' >");
+                } else {
+                    $("#tenkihyouji").html("<img src='http://openweathermap.org/img/w/01n.png' >");
+                } 
+             });
+             
+            //3h毎の天気取得&3日分の天気取得
+            $.post("http://api.openweathermap.org/data/2.5/forecast?id=" + $(this).val() + "&appid=98226af57c372a395d8eab253a62da2d&lang=ja&units=metric",  
+                function(json){
+                    console.log(json);
+                    const kion6 = (Math.round(json.list[0].main.temp));
+                    const kion9 = (Math.round(json.list[1].main.temp));
+                    const kion12 = (Math.round(json.list[2].main.temp));
+                    const kion15 = (Math.round(json.list[3].main.temp));
+                    const kion18 = (Math.round(json.list[4].main.temp));
+                    const kion21 = (Math.round(json.list[5].main.temp));
+                    const kion1day = (Math.round(json.list[8].main.temp));
+                    const kion2day = (Math.round(json.list[16].main.temp));
+                    const kion3day = (Math.round(json.list[32].main.temp));
+
+                    const std6 = (Math.round(json.list[0].main.humidity));
+                    const std9 = (Math.round(json.list[1].main.humidity));
+                    const std12 = (Math.round(json.list[2].main.humidity));
+                    const std15 = (Math.round(json.list[3].main.humidity));
+                    const std18 = (Math.round(json.list[4].main.humidity));
+                    const std21 = (Math.round(json.list[5].main.humidity));
+                    const wter1day = (json.list[8].weather[0].description);
+                    const wter2day = (json.list[16].weather[0].description);
+                    const wter3day = (json.list[32].weather[0].description);
+                    const hsk1day = (Math.round(json.list[8].wind.deg));
+                    const hsk2day = (Math.round(json.list[16].wind.deg));
+                    const hsk3day = (Math.round(json.list[32].wind.deg));
+                    const kzm1day = (Math.round(json.list[8].wind.speed));
+                    const kzm2day = (Math.round(json.list[16].wind.speed));
+                    const kzm3day = (Math.round(json.list[32].wind.speed));
+
+                    
+                    let tenki6 = "";
+                    let tenki9 = "";
+                    let tenki12 = "";
+                    let tenki15 = "";
+                    let tenki18 = "";
+                    let tenki21 = "";
+                    let tenki1day = "";
+                    let tenki2day = "";
+                    let tenki3day = "";
+                    let time6 = json.list[0].dt_txt
+                    let time66 = time6.replace(":00","").replace("2021-","")
+                    let time9 = json.list[1].dt_txt
+                    let time99 = time9.replace(":00","").replace("2021-","")
+                    let time12 = json.list[2].dt_txt
+                    let time1212 = time12.replace(":00","").replace("2021-","")
+                    let time15 = json.list[3].dt_txt
+                    let time1515 = time15.replace(":00","").replace("2021-","")
+                    let time18 = json.list[4].dt_txt
+                    let time1818 = time18.replace(":00","").replace("2021-","")
+                    let time21 = json.list[5].dt_txt
+                    let time2121 = time21.replace(":00","").replace("2021-","")
+                    let time1day = json.list[8].dt_txt
+                    let time11day = time1day.replace(":00","").replace("2021-","").replace("00:00","").replace("06:00","").replace("09:00","").replace("12:00","").replace("15:00","").replace("18:00","").replace("21:00","")
+                    let time2day = json.list[16].dt_txt
+                    let time22day = time2day.replace(":00","").replace("2021-","").replace("00:00","").replace("06:00","").replace("09:00","").replace("12:00","").replace("15:00","").replace("18:00","").replace("21:00","")
+                    let time3day = json.list[24].dt_txt
+                    let time33day = time3day.replace(":00","").replace("2021-","").replace("00:00","").replace("06:00","").replace("09:00","").replace("12:00","").replace("15:00","").replace("18:00","").replace("21:00","")
+
+                    $("#jikan6").html(time66 + "　　　" + kion6 + " ℃ " + "　　" + std6 + " % 　");
+                    $("#jikan9").html(time99 + "　　　" + kion9 + " ℃ " + "　　" + std9 + " % 　");
+                    $("#jikan12").html(time1212 + "　　　" + kion12 + " ℃" + "　　" + std12 + " % 　");
+                    $("#jikan15").html(time1515 + "　　　" + kion15 + " ℃" + "　　" + std15 + " % 　");
+                    $("#jikan18").html(time1818 + "　　　" + kion18 + " ℃" + "　　" + std18 + " % 　");
+                    $("#jikan21").html(time2121 + "　　　" + kion21 + " ℃" + "　　" + std21 + " % 　");
+                    $("#day8").html(time11day + "　　　"+ wter1day + "　　　" + kion1day + " ℃" + "　　" + hsk1day + "度　　" + kzm1day + "m/秒 ");
+                    $("#day16").html(time22day +"　　　"+ wter2day + "　　　" + kion2day + " ℃" + "　　" + hsk2day + "度　　" + kzm2day + "m/秒 ");
+                    $("#day24").html(time33day +"　　　"+ wter3day +"　　　" + kion3day + " ℃" + "　　" + hsk3day + "度　　" + kzm3day + "m/秒 ");
+                    
+                    t = 6;
+                    for(i=0; i<6; i++){
+                        if (json.list[i].weather[0].main == 'Clouds'){
+                            $("#jikan"+t).append("　"　+ "<img src='http://openweathermap.org/img/w/04d.png' >");
+                        } else if (json.list[i].weather[0].main == 'Snow') {
+                            $("#jikan"+t).append("　"　+ "<img src='http://openweathermap.org/img/w/13d.png' >");
+                        } else if (json.list[i].weather[0].main == 'Rain') {
+                            $("#jikan"+t).append("　"　+ "<img src='http://openweathermap.org/img/w/09d.png' >");
+                        } else if (json.list[i].weather[0].main == 'Clear') {
+                            $("#jikan"+t).append("　"　+ "<img src='http://openweathermap.org/img/w/01d.png' >");
+                        } else if (json.list[i].weather[0].main == 'Fog') {
+                            $("#jikan"+t).append("　"　+ "<img src='http://openweathermap.org/img/w/50d.png' >");
+                        } else if (json.list[i].weather[0].main == 'Mist') {
+                            $("#jikan"+t).append("　"　+ "<img src='http://openweathermap.org/img/w/50n.png' >");
+                        } else if (json.list[i].weather[0].main == 'Haze') {
+                            $("#jikan"+t).append("　"　+ "<img src='http://openweathermap.org/img/w/50d.png' >");
+                        } else {
+                            $("#jikan"+t).append("　"　+ "<img src='http://openweathermap.org/img/w/01n.png' >");
+                        } 
+                        t = t + 3;
+                    }
+                });
+        });
+    });
+</script>
+</body>

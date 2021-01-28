@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>関東の天気予報</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script> 
+<script src='https://use.fontawesome.com/releases/v5.0.13/js/all.js'></script>
+</head>
+<body>
+    <style>
+        body {
+            background: url(haikei.jpg) no-repeat center center;
+            background-size: cover;
+            background-attachment: fixed;
+            background-color:rgba(255,255,255,0.4);
+            background-blend-mode:color;
+            text-align: center;
+            margin: 50px;
+        }
+
+        h1 {
+            font-family: 'ヒラギノ角ゴ Std W8','Hiragino Kaku Gothic Std'
+            font-size: 1.5em;
+            font-weight: bold;
+            padding-top: .5em;
+            padding-bottom: .5em;
+            padding-left: .5em;
+            margin-bottom: 2em;
+            background-color:  #3d8a6a;
+            border-radius:15px;
+            color: rgb(238, 238, 238);
+        }
+
+        h2 {
+            font-family: 'Courier New', Courier, monospace;
+            margin-top: 40px;
+            margin-bottom: 32px;
+            font-size: 1.3em;
+            font-weight: bold;
+            padding: 1em;
+            margin-bottom: 2em;
+            border: 4px double #2e852c;
+            background-color: rgb(255, 255, 255);
+            border-radius: 10px;
+            text-align: center;
+            color: #0e310d;
+            width:300px;
+            margin-left:auto;
+            margin-right:auto;
+        
+        }
+
+        .button {
+            margin-top: 32px;
+            background-color: rgb(3, 145, 109);
+            border-color: rgb(0, 68, 26);
+            color: #fff;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .button:hover {
+            background-color: #5cc2b4;
+        }
+
+        .bold {
+            color: rgb(255, 255, 255);
+            font-weight: bold;
+            font-size: 1.5em;
+        }
+
+        .kekka {
+            margin-top: 40px;
+            width:500px;
+            margin-left:auto;
+            margin-right:auto;
+            font-size: 1.2em;
+            font-weight: bold;
+            padding-top: .2em;
+            padding-bottom: .5em;
+            padding-left: .5em;
+            margin-bottom: 2em;
+            background-color: #3d8a6a;
+            color: #ffffff;
+        }
+
+    </style>
+    <div class="container">
+        <h1 id="view"></h1>
+        <div>
+          <h2>都市の選択</h2>
+            <input type="radio" id="cityRadio" name="cityRadio" value="2111901">水戸
+            <input type="radio" id="cityRadio" name="cityRadio" value="1849053">宇都宮
+            <input type="radio" id="cityRadio" name="cityRadio" value="1857843">前橋
+            <input type="radio" id="cityRadio" name="cityRadio" value="6940394">さいたま
+            <input type="radio" id="cityRadio" name="cityRadio" value="2113015">千葉
+            <input type="radio" id="cityRadio" name="cityRadio" value="1850147">東京
+            <input type="radio" id="cityRadio" name="cityRadio" value="1848354">横浜
+            </br><button id="submit" class="button">Click <a class="fas fa-certificate"></a></button>
+        </div> 
+        <div class="kekka">
+            <h3 id="view2"></h3>
+                <div><span id = "weather" class="bold"></span></div>
+                <div><span id = "tenkihyouji" class="bold"></span></div>
+            <div>気温　<span id = "kion" class="bold"></span>　℃</div>
+            <div>湿度　<span id = "situdo" class="bold"></span>　%</div>
+        </div>
+    </div>
+    
+    <script>
+    let week   = ["日", "月", "火", "水", "木", "金", "土"];
+    let now = new Date();            
+    let year = now.getFullYear();    
+    let month = now.getMonth() + 1;  
+    let date = now.getDate();        
+    let day = now.getDay();          
+    let h = now.getHours();          
+    let m = now.getMinutes();        
+    let s = now.getSeconds();        
+
+    let str = year + "-" + month + "-" + date + "(" + week[day] + ")" + "の関東各地の天気";
+    let view = h + "時" + m + "分現在の天気は";
+
+    $('#view').html(str);
+    $("#view2").html(view);
+
+    const appid = "98226af57c372a395d8eab253a62da2d";
+
+    $(document).ready(function() {
+        $("#submit").on("click", function(){
+            $.post("http://api.openweathermap.org/data/2.5/weather?id=" + $("input[id='cityRadio']:checked").val() + "&appid=cc05750ba50400f27ebabbcd6f4c4976&lang=ja&units=metric",  
+                function(json){
+                    $("#weather").html(json.weather[0].description);
+                    $("#situdo").html(json.main.humidity);
+                    $("#kion").html(Math.round(json.main.temp));
+
+                if (json.weather[0].main == 'Clouds'){
+                    $("#tenkihyouji").html("<img src='http://openweathermap.org/img/w/04d.png' >");
+                } else if (json.weather[0].main == 'Snow') {
+                    $("#tenkihyouji").html("<img src='http://openweathermap.org/img/w/13d.png' >");
+                } else if (json.weather[0].main == 'Rain') {
+                    $("#tenkihyouji").html("<img src='http://openweathermap.org/img/w/09d.png' >");
+                } else if (json.weather[0].main == 'Clear') {
+                    $("#tenkihyouji").html("<img src='http://openweathermap.org/img/w/01d.png' >");
+                } else if (json.weather[0].main == 'Fog') {
+                    $("#tenkihyouji").html("<img src='http://openweathermap.org/img/w/50d.png' >");
+                } else if (json.weather[0].main == 'Mist') {
+                    $("#tenkihyouji").html("<img src='http://openweathermap.org/img/w/50n.png' >");
+                } else if (json.weather[0].main == 'Haze') {
+                    $("#tenkihyouji").html("<img src='http://openweathermap.org/img/w/50d.png' >");
+                } else {
+                    $("#tenkihyouji").html("<img src='http://openweathermap.org/img/w/01n.png' >");
+                } 
+
+             }
+        );
+    });
+});
+
+</script>
+</body>

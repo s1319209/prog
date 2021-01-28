@@ -11,25 +11,26 @@
 
   <main>
     <p id="date">ここに表示されます</p>
-    <p id="rain0">ここに表示されます</p>
     <p id="rain1">ここに表示されます</p>
     <p id="rain2">ここに表示されます</p>
     <p id="rain3">ここに表示されます</p>
     <p id="rain4">ここに表示されます</p>
     <p id="rain5">ここに表示されます</p>
+    <p id="rain6">ここに表示されます</p>
   </main>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script>
   
       // YAHOO天気APIに必要
       // http://developer.yahoo.co.jp/ の「アプリケーション管理」で取得！
-      const appid = "自分のappidをここに貼り付けてください。";
+      const appid = "dj00aiZpPW5OdDdiaDNKcDVVTCZzPWNvbnN1bWVyc2VjcmV0Jng9MjI-";
       const coord = "139.411102,35.615841"; //経度、緯度（唐木田周辺）
   
       //getJSON[開始]
-      $.getJSON("https://map.yahooapis.jp/weather/V1/place?callback=?&coordinates="+coord+"&output=jsonp&appid="+appid, function (data) {　　
+      $.getJSON("https://map.yahooapis.jp/weather/V1/place?callback=?&coordinates="+coord+"&output=jsonp&appid="+appid,function (data) {　　
   
         console.dir(data); //JSONデータ確認用
+
   
         //必要なデータ（JSON）を取得
         const d = data.Feature[0].Property.WeatherList.Weather[0].Date;
@@ -39,15 +40,16 @@
         const r3 = data.Feature[0].Property.WeatherList.Weather[3].Rainfall;
         const r4 = data.Feature[0].Property.WeatherList.Weather[4].Rainfall;
         const r5 = data.Feature[0].Property.WeatherList.Weather[5].Rainfall;
+
   
         //HTMLに表示
-        $("#date").html("日付：" + d);
         $("#rain0").html("降水強度予測値：今現在=" + r0 + "(mm/h)");
         $("#rain1").html("降水強度予測値：10分後=" + r1 + "(mm/h)");
         $("#rain2").html("降水強度予測値：20分後=" + r2 + "(mm/h)");
         $("#rain3").html("降水強度予測値：30分後=" + r3 + "(mm/h)");
         $("#rain4").html("降水強度予測値：40分後=" + r4 + "(mm/h)");
         $("#rain5").html("降水強度予測値：50分後=" + r5 + "(mm/h)");
+        $("#rain6").html("降水強度予測値：60分後=" + r5 + "(mm/h)");
   
       });
       //getJSON[END]
